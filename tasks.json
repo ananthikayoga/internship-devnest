@@ -6,9 +6,9 @@
     "priority": "HIGH",
     "due_date": "2026-05-15",
     "category": "DevOps",
-    "completed": false,
+    "completed": true,
     "created_date": "2026-05-12 21:45:41",
-    "completed_date": null,
+    "completed_date": "2026-05-12 21:46:26",
     "reminders_set": false
   }
 ]
