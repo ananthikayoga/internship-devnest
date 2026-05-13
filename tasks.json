@@ -10,5 +10,41 @@
     "created_date": "2026-05-12 21:45:41",
     "completed_date": "2026-05-12 21:46:26",
     "reminders_set": false
+  },
+  {
+    "id": "6791a9e5",
+    "title": "Write Unit Tests",
+    "description": "Write comprehensive unit tests for API endpoints",
+    "priority": "MEDIUM",
+    "due_date": "2026-05-25",
+    "category": "Testing",
+    "completed": true,
+    "created_date": "2026-05-12 21:47:15",
+    "completed_date": "2026-05-12 22:15:54",
+    "reminders_set": false
+  },
+  {
+    "id": "281a1ef1",
+    "title": "Update Documentation",
+    "description": "Update API documentation with new endpoints",
+    "priority": "LOW",
+    "due_date": null,
+    "category": "Documentation",
+    "completed": false,
+    "created_date": "2026-05-12 21:48:46",
+    "completed_date": null,
+    "reminders_set": false
+  },
+  {
+    "id": "f56b09f9",
+    "title": "task-pro",
+    "description": "task pro is a task managing tool",
+    "priority": "HIGH",
+    "due_date": "2026-05-15",
+    "category": "python tool",
+    "completed": true,
+    "created_date": "2026-05-12 22:17:33",
+    "completed_date": "2026-05-12 22:31:09",
+    "reminders_set": false
   }
 ]

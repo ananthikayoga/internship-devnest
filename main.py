@@ -196,11 +196,26 @@ class TaskFlowCLI:
         """Edit task"""
         Formatter.print_subheader("EDIT TASK", Colors.BRIGHT_BLUE)
         
-        task_id = Formatter.get_input("Enter Task ID: ").strip()
-        task = self.manager.get_task(task_id)
-
-        if not task:
-            Formatter.print_error("Task not found.")
+        tasks = self.manager.get_all_tasks()
+        if not tasks:
+            Formatter.print_info("No tasks available to edit.")
+            return
+        
+        for index, task in enumerate(tasks, 1):
+            Formatter.print_task(task, index)
+        
+        try:
+            selection = Formatter.get_input("\nSelect task number to edit: ").strip()
+            index = int(selection)
+            
+            if not (1 <= index <= len(tasks)):
+                Formatter.print_error(f"Please enter a number between 1 and {len(tasks)}")
+                return
+            
+            task = tasks[index - 1]
+            task_id = task.id
+        except ValueError:
+            Formatter.print_error("Invalid input. Please enter a task number.")
             return
 
         print(f"\n{Colors.BRIGHT_GREEN}Current Task:{Colors.RESET}")
@@ -267,32 +282,80 @@ class TaskFlowCLI:
         """Mark task as completed"""
         Formatter.print_subheader("MARK TASK COMPLETE", Colors.BRIGHT_GREEN)
         
-        self.view_tasks("active")
-        task_id = Formatter.get_input("\nEnter Task ID to mark complete: ").strip()
-
-        if self.manager.mark_completed(task_id):
-            Formatter.print_success("Task marked as completed!")
-        else:
-            Formatter.print_error("Task not found.")
+        tasks = self.manager.get_active_tasks()
+        if not tasks:
+            Formatter.print_info("No active tasks to complete.")
+            return
+        
+        for index, task in enumerate(tasks, 1):
+            Formatter.print_task(task, index)
+        
+        try:
+            selection = Formatter.get_input("\nSelect task number to mark complete: ").strip()
+            index = int(selection)
+            
+            if 1 <= index <= len(tasks):
+                task_id = tasks[index - 1].id
+                if self.manager.mark_completed(task_id):
+                    Formatter.print_success("Task marked as completed!")
+                else:
+                    Formatter.print_error("Task not found.")
+            else:
+                Formatter.print_error(f"Please enter a number between 1 and {len(tasks)}")
+        except ValueError:
+            Formatter.print_error("Invalid input. Please enter a task number.")
 
     def mark_incomplete(self) -> None:
         """Mark task as incomplete"""
         Formatter.print_subheader("MARK TASK INCOMPLETE", Colors.BRIGHT_YELLOW)
         
-        self.view_tasks("completed")
-        task_id = Formatter.get_input("\nEnter Task ID to mark incomplete: ").strip()
-
-        if self.manager.mark_incomplete(task_id):
-            Formatter.print_success("Task marked as incomplete!")
-        else:
-            Formatter.print_error("Task not found.")
+        tasks = self.manager.get_completed_tasks()
+        if not tasks:
+            Formatter.print_info("No completed tasks to reopen.")
+            return
+        
+        for index, task in enumerate(tasks, 1):
+            Formatter.print_task(task, index)
+        
+        try:
+            selection = Formatter.get_input("\nSelect task number to mark incomplete: ").strip()
+            index = int(selection)
+            
+            if 1 <= index <= len(tasks):
+                task_id = tasks[index - 1].id
+                if self.manager.mark_incomplete(task_id):
+                    Formatter.print_success("Task marked as incomplete!")
+                else:
+                    Formatter.print_error("Task not found.")
+            else:
+                Formatter.print_error(f"Please enter a number between 1 and {len(tasks)}")
+        except ValueError:
+            Formatter.print_error("Invalid input. Please enter a task number.")
 
     def delete_task(self) -> None:
         """Delete task"""
         Formatter.print_subheader("DELETE TASK", Colors.BRIGHT_RED)
         
-        self.view_tasks("all")
-        task_id = Formatter.get_input("\nEnter Task ID to delete: ").strip()
+        tasks = self.manager.get_all_tasks()
+        if not tasks:
+            Formatter.print_info("No tasks available to delete.")
+            return
+        
+        for index, task in enumerate(tasks, 1):
+            Formatter.print_task(task, index)
+        
+        try:
+            selection = Formatter.get_input("\nSelect task number to delete: ").strip()
+            index = int(selection)
+            
+            if not (1 <= index <= len(tasks)):
+                Formatter.print_error(f"Please enter a number between 1 and {len(tasks)}")
+                return
+            
+            task_id = tasks[index - 1].id
+        except ValueError:
+            Formatter.print_error("Invalid input. Please enter a task number.")
+            return
 
         if Formatter.get_yes_no("Are you sure you want to delete this task?"):
             if self.manager.delete_task(task_id):

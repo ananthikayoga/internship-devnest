@@ -1,0 +1,3 @@
+# Requirements for TaskFlow Pro
+# (project uses Python standard library; add packages here if you install extras)
+colorama>=0.4.6
