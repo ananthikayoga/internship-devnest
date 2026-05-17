@@ -88,33 +88,3 @@ class DataStorage:
             if task.id == task_id:
                 return task
         return None
-
-    def clear_all_tasks(self) -> None:
-        """Clear all tasks from storage"""
-        self._save_to_file([])
-
-    def export_tasks(self, export_file: str) -> None:
-        """Export tasks to another JSON file"""
-        tasks = self.load_tasks()
-        tasks_data = [task.to_dict() for task in tasks]
-        try:
-            with open(export_file, 'w', encoding='utf-8') as f:
-                json.dump(tasks_data, f, indent=2, ensure_ascii=False)
-            print(f"Tasks exported to {export_file}")
-        except IOError as e:
-            print(f"Error exporting tasks: {e}")
-
-    def import_tasks(self, import_file: str) -> None:
-        """Import tasks from another JSON file"""
-        try:
-            with open(import_file, 'r', encoding='utf-8') as f:
-                tasks_data = json.load(f)
-            tasks = self.load_tasks()
-            for data in tasks_data:
-                task = Task.from_dict(data)
-                if not any(t.id == task.id for t in tasks):
-                    tasks.append(task)
-            self.save_tasks(tasks)
-            print(f"Tasks imported from {import_file}")
-        except (IOError, json.JSONDecodeError) as e:
-            print(f"Error importing tasks: {e}")

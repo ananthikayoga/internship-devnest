@@ -8,7 +8,7 @@
     "category": "DevOps",
     "completed": true,
     "created_date": "2026-05-12 21:45:41",
-    "completed_date": "2026-05-12 21:46:26",
+    "completed_date": "2026-05-15 11:49:07",
     "reminders_set": false
   },
   {
@@ -30,21 +30,21 @@
     "priority": "LOW",
     "due_date": null,
     "category": "Documentation",
-    "completed": false,
+    "completed": true,
     "created_date": "2026-05-12 21:48:46",
-    "completed_date": null,
+    "completed_date": "2026-05-15 21:09:12",
     "reminders_set": false
   },
   {
     "id": "f56b09f9",
     "title": "task-pro",
     "description": "task pro is a task managing tool",
-    "priority": "HIGH",
+    "priority": "MEDIUM",
     "due_date": "2026-05-15",
     "category": "python tool",
-    "completed": true,
+    "completed": false,
     "created_date": "2026-05-12 22:17:33",
-    "completed_date": "2026-05-12 22:31:09",
+    "completed_date": null,
     "reminders_set": false
   }
 ]

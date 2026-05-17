@@ -188,20 +188,6 @@ class TaskManager:
         """Reload tasks from storage"""
         self.tasks = self.storage.load_tasks()
 
-    def export_tasks(self, export_file: str) -> None:
-        """Export tasks"""
-        self.storage.export_tasks(export_file)
-
-    def import_tasks(self, import_file: str) -> None:
-        """Import tasks"""
-        self.storage.import_tasks(import_file)
-        self.reload_tasks()
-
-    def clear_all_tasks(self) -> None:
-        """Clear all tasks"""
-        self.tasks = []
-        self.storage.clear_all_tasks()
-
     def get_statistics_summary(self) -> dict:
         """Get quick statistics"""
         analytics = self.get_analytics()

@@ -54,11 +54,6 @@ class TaskFlowCLI:
   D️⃣  View Overdue Tasks
   E️⃣  View Due Soon Tasks
   
-  📁 Data Management
-  I️⃣  Import Tasks
-  E️⃣  Export Tasks
-  C️⃣  Clear All Tasks
-  
   ❌ Exit
         """)
 
@@ -392,40 +387,6 @@ class TaskFlowCLI:
         else:
             Formatter.print_info("No upcoming tasks.")
 
-    def import_tasks(self) -> None:
-        """Import tasks from file"""
-        Formatter.print_subheader("IMPORT TASKS", Colors.BRIGHT_BLUE)
-        
-        filename = Formatter.get_input("Enter filename to import from: ").strip()
-        try:
-            self.manager.import_tasks(filename)
-            Formatter.print_success("Tasks imported successfully!")
-        except Exception as e:
-            Formatter.print_error(f"Import failed: {e}")
-
-    def export_tasks(self) -> None:
-        """Export tasks to file"""
-        Formatter.print_subheader("EXPORT TASKS", Colors.BRIGHT_BLUE)
-        
-        filename = Formatter.get_input("Enter filename to export to: ").strip()
-        if not filename.endswith(".json"):
-            filename += ".json"
-        
-        try:
-            self.manager.export_tasks(filename)
-            Formatter.print_success(f"Tasks exported to {filename}!")
-        except Exception as e:
-            Formatter.print_error(f"Export failed: {e}")
-
-    def clear_all_tasks(self) -> None:
-        """Clear all tasks"""
-        Formatter.print_warning("This will delete ALL tasks!")
-        if Formatter.get_yes_no("Are you absolutely sure?"):
-            self.manager.clear_all_tasks()
-            Formatter.print_success("All tasks cleared!")
-        else:
-            Formatter.print_info("Operation cancelled.")
-
     def run(self) -> None:
         """Run the CLI application"""
         self.display_welcome()
@@ -478,12 +439,6 @@ class TaskFlowCLI:
                     self.view_overdue_tasks()
                 elif choice == "E":
                     self.view_due_soon()
-                elif choice == "I":
-                    self.import_tasks()
-                elif choice == "E":
-                    self.export_tasks()
-                elif choice == "C":
-                    self.clear_all_tasks()
                 elif choice == "EXIT" or choice == "X":
                     Formatter.print_success("Thank you for using TaskFlow Pro! Goodbye!")
                     self.running = False
